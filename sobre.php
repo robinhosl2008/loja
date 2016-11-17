@@ -5,8 +5,8 @@
  * Date: 24/10/2016
  * Time: 20:22
  */
-
-if(!isset($_COOKIE['usuario_logado'])){
+session_start();
+if(!isset($_SESSION['usuario_logado'])){
     header('location: index.php');
 }
 ?>

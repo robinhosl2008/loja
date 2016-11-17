@@ -38,7 +38,7 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <?php session_start(); if(isset($_SESSION['usuario_logado'])): ?>
-                        <li><a href="produto-lista.php">Listar</a></li>
+                        <li><a href="produto-lista.php">Produtos</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastros <span class="caret"></span></a>
                             <ul class="dropdown-menu">
