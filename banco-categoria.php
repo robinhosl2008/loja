@@ -32,6 +32,17 @@ function adicionaCategoria($no_categoria){
     }
 }
 
+function editaCategoria($id, $no_categoria){
+    $conexao = getConnection();
+    $query = "update categoria set no_categoria='$no_categoria' where id = $id";
+
+    if(mysqli_query($conexao, $query)){
+        return "true";
+    }else{
+        return "false";
+    }
+}
+
 function buscaCategoria($id){
     $conexao = getConnection();
     $query = "select * from categoria where id = $id";
@@ -40,3 +51,30 @@ function buscaCategoria($id){
 
     return $categoria;
 }
+
+function removeCategoria($id){
+    $conexao = getConnection();
+    $query = "DELETE categoria.* FROM categoria WHERE id = $id";
+    $result = mysqli_query($conexao, $query);
+    return $result;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

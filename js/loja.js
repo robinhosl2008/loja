@@ -3,5 +3,5 @@
  */
 
 if($('.alert').is(':visible')){
-    $('.alert').fadeOut(3000);
+    $('.alert').fadeOut(4000);
 }

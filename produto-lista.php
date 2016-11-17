@@ -18,26 +18,23 @@
 </style>
 
 
-    <?php
-        if(array_key_exists('acao', $_GET)) {
-            $acao = $_GET['acao'];
-            if ($acao == "false") { ?>
-                <div class="alert alert-warning alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <strong>Atenção!</strong> Procedimento não realizado.
-                </div>
-            <?php } else { ?>
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <strong>Sucesso!</strong> Procedimento realizado.
-                </div>
-            <?php }
-        }
+    <?php if(isset($_SESSION['acao']) && $_SESSION['acao'] == "Sucesso!") { ?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <strong><?php echo $_SESSION['acao']; ?></strong> <?php echo $_SESSION['resultado'] ?>.
+        </div>
+    <?php unset($_SESSION['acao'], $_SESSION['resultado']); } ?>
 
-    include('banco-produto.php');
-?>
+    <?php if(isset($_SESSION['acao']) && $_SESSION['acao'] == "Atenção!") { ?>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <strong><?php echo $_SESSION['acao']; ?></strong> <?php echo $_SESSION['resultado'] ?>.
+        </div>
+    <?php unset($_SESSION['acao'], $_SESSION['resultado']); } ?>
+
+    <?php include('banco-produto.php'); ?>
 
     <table class="table table-bordered table-responsive table-hover">
         <thead>

@@ -11,7 +11,7 @@
     include("cabecalho.php");
     include("banco-categoria.php");
 ?>
-<?php if(!isset($_COOKIE['usuario_logado'])){
+<?php if(!isset($_SESSION['usuario_logado'])){
     header('location: index.php');
 } ?>
 

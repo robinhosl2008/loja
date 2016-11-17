@@ -26,9 +26,13 @@ $descricao = $_POST['descricao'];
 $resultCadastro = insereProduto($nome, $preco, $usado, $categoria, $descricao);
 
 if($resultCadastro == true){
-    header('location: produto-lista.php?acao=true');
+    $_SESSION['acao'] = "Sucesso!";
+    $_SESSION['resultado'] = "O produto foi cadastrado.";
+    header('location: produto-lista.php');
 }else{ $msg_error = mysqli_error($conexao);
-    header('location: produto-lista.php?acao=false');
+    $_SESSION['acao'] = "Atenção!";
+    $_SESSION['resultado'] = "O produto não foi cadastrado.";
+    header('location: produto-lista.php');
 }
 
 

@@ -8,35 +8,32 @@
 ?>
 
 <?php
-    include("cabecalho.php");?>
-<?php    include("categoria-lista.php");?>
+    include("cabecalho.php");
+    include("categoria-lista.php");
+?>
 
-<?php if(!isset($_COOKIE['usuario_logado'])){
+<?php if(!isset($_SESSION['usuario_logado'])){
     header('location: index.php');
 } ?>
 
-    <h1>Cadastro de Categoria</h1>
+    <h1>Novo Cadastro</h1>
 
 <div class="formulario">
     <form action="adiciona-categoria.php" method="post">
-        <input type="text" name="id" id="id" value="
-        <?php
+        <input type="text" name="id" id="id" value="<?php
             if(isset($_POST['id'])){
                 echo $_POST['id'];
             }
-        ?>
-        " />
+        ?>" />
 
         <div class="form-group">
             <label for="nome">Categoria</label>
-            <input class="form-control" type="text" name="nome" id="nome" value="
-                <?php
+            <input class="form-control" type="text" name="nome" id="nome" value="<?php
                     if(isset($_POST['id'])){
                         $cat = getCategoria($_POST['id']);
                         echo $cat['no_categoria'];
                     }
-                ?>
-            " />
+                ?>" />
         </div>
 
         <div class="form-group">
@@ -48,23 +45,23 @@
 
     <h1>Lista de Categorias</h1>
 
-<?php
-if(array_key_exists('acao', $_GET)) {
-    $acao = $_GET['acao'];
-    if ($acao == "false") { ?>
-        <div class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-            <strong>Atenção!</strong> Procedimento não realizado.
-        </div>
-    <?php } else { ?>
-        <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-            <strong>Sucesso!</strong> Procedimento realizado.
-        </div>
-    <?php }
-} ?>
+
+<?php if(isset($_SESSION['acao']) && $_SESSION['acao'] == "Sucesso!") { ?>
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <strong><?php echo $_SESSION['acao']; ?></strong> <?php echo $_SESSION['resultado'] ?>.
+    </div>
+    <?php unset($_SESSION['acao'], $_SESSION['resultado']); } ?>
+
+<?php if(isset($_SESSION['acao']) && $_SESSION['acao'] == "Atenção!") { ?>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <strong><?php echo $_SESSION['acao']; ?></strong> <?php echo $_SESSION['resultado'] ?>.
+    </div>
+    <?php unset($_SESSION['acao'], $_SESSION['resultado']); } ?>
+
 
     <table class="table table-bordered table-responsive table-hover table-condensed">
         <thead>

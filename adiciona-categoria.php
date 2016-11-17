@@ -11,12 +11,33 @@ include('banco-categoria.php');
 
 verificaUsuario();
 
-$no_categoria = $_POST['nome'];
+if(isset($_POST['nome']) && $_POST['nome'] == "") {
+    $_SESSION['acao'] = "Atenção!";
+    $_SESSION['resultado'] = "O nome da nova categoria não pode estar em branco.";
+    header('location: categoria-formulario.php');
+    die();
+}
 
-$result = adicionaCategoria($no_categoria);
+if(isset($_POST['id']) && $_POST['id'] != "") {
+    $result = editaCategoria($_POST['id'], $_POST['nome']);
+}else{
+    $result = adicionaCategoria($_POST['nome']);
+}
 
 if($result == true){
-    header('location: categoria-formulario.php?acao=true');
+    $_SESSION['acao'] = "Sucesso!";
+    if(isset($_POST['id']) && $_POST['id'] != ""){
+        $_SESSION['resultado'] = "A categoria foi alterada.";
+    }else {
+        $_SESSION['resultado'] = "A categoria foi cadastrada.";
+    }
+    header('location: categoria-formulario.php');
 }else{ $msg_error = mysqli_error($conexao);
-    header('location: categoria-formulario.php?acao=false');
+    $_SESSION['acao'] = "Atenção!";
+    if(isset($_POST['id']) && $_POST['id'] != ""){
+        $_SESSION['resultado'] = "A categoria nao foi alterada.";
+    }else {
+        $_SESSION['resultado'] = "A categoria nao foi cadastrada.";
+    }
+    header('location: categoria-formulario.php');
 }
