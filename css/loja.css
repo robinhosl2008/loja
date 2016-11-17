@@ -1,0 +1,17 @@
+body {
+    padding-top: 50px;
+}
+
+.principal {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.formulario{
+    margin: 0 auto;
+    width: 50%;
+}
+
+.acao{
+    width: 100px;
+}
