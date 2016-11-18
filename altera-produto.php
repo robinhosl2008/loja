@@ -23,7 +23,11 @@ endif;
 $result = alteraProduto($id, $nome, $preco, $usado, $descricao, $categoria);
 
 if($result == true){
-    header('location: produto-lista?acao=true');
+    $_SESSION['acao'] = "Sucesso!";
+    $_SESSION['resultado'] = "O produto ".$nome." foi alterado.";
+    header('location: produto-lista.php');
 }else{ $msg_error = mysqli_error($conexao);
-    header('location: produto-lista?acao=false');
+    $_SESSION['acao'] = "Sucesso!";
+    $_SESSION['resultado'] = "O produto $nome não foi alterado. Erro: ".$msg_error;
+    header('location: produto-lista.php');
 }

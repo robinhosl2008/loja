@@ -7,16 +7,9 @@
  */
 ?>
 
-<?php include('cabecalho.php');
-
- ?>
+<?php include('cabecalho.php'); ?>
 
     <h1>Lista de Produtos</h1>
-
-<style>
-
-</style>
-
 
     <?php if(isset($_SESSION['acao']) && $_SESSION['acao'] == "Sucesso!") { ?>
         <div class="alert alert-success alert-dismissible" role="alert">
