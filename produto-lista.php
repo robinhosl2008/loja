@@ -5,9 +5,12 @@
  * Date: 24/10/2016
  * Time: 21:30
  */
-?>
 
-<?php include('cabecalho.php'); ?>
+include('cabecalho.php');
+
+if(!isset($_SESSION['usuario_logado'])){
+    header('location: index.php');
+} ?>
 
     <h1>Lista de Produtos</h1>
 

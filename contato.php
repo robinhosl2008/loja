@@ -6,9 +6,9 @@
  * Time: 20:24
  */
 session_start();
-if(!isset($_SESSION['usuario_logado'])){
-    header('location: index.php');
-}
+//if(!isset($_SESSION['usuario_logado'])){
+    //header('location: index.php');
+//}
 ?>
 
 <?php include('cabecalho.php'); ?>

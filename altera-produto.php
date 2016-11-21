@@ -6,6 +6,8 @@
  * Time: 20:29
  */
 
+session_start();
+
 include("banco-produto.php");
 
 $id = $_POST['id'];
@@ -25,9 +27,11 @@ $result = alteraProduto($id, $nome, $preco, $usado, $descricao, $categoria);
 if($result == true){
     $_SESSION['acao'] = "Sucesso!";
     $_SESSION['resultado'] = "O produto ".$nome." foi alterado.";
-    header('location: produto-lista.php');
+
 }else{ $msg_error = mysqli_error($conexao);
-    $_SESSION['acao'] = "Sucesso!";
+    $_SESSION['acao'] = "Atenção!";
     $_SESSION['resultado'] = "O produto $nome não foi alterado. Erro: ".$msg_error;
-    header('location: produto-lista.php');
 }
+
+header('location: produto-lista.php');
+die();

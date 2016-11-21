@@ -11,7 +11,7 @@ include_once('conexao.php');
 function listaCategorias(){
     $conexao = getConnection();
     $categorias = array();
-    $query = "select * from categoria";
+    $query = "select * from categoria order by no_categoria asc";
     $resultado = mysqli_query($conexao, $query);
 
     while ($categoria = mysqli_fetch_assoc($resultado)) {
@@ -54,6 +54,9 @@ function buscaCategoria($id){
 
 function removeCategoria($id){
     $conexao = getConnection();
+
+
+
     $query = "DELETE categoria.* FROM categoria WHERE id = $id";
     $result = mysqli_query($conexao, $query);
     return $result;

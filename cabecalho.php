@@ -46,8 +46,13 @@
                                 <li><a href="categoria-formulario.php">Categorias</a></li>
                             </ul>
                         </li>
+                    <?php endif; ?>
                         <li><a href="sobre.php">Sobre</a></li>
                         <li><a href="contato.php">Contato</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <?php session_start(); if(isset($_SESSION['usuario_logado'])): ?>
+                        <li><a href="#"><?php echo $_SESSION['usuario_logado'] ?> <span class="glyphicon glyphicon-cog"></span></span></a></li>
                         <li><a href="logout.php">Sair</a></li>
                     <?php endif; ?>
                 </ul>

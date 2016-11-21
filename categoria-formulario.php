@@ -20,7 +20,7 @@
 
 <div class="formulario">
     <form action="adiciona-categoria.php" method="post">
-        <input type="text" name="id" id="id" value="<?php
+        <input type="hidden" name="id" id="id" value="<?php
             if(isset($_POST['id'])){
                 echo $_POST['id'];
             }
