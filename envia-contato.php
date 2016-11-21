@@ -8,6 +8,7 @@
 
 $nome = $_POST['nome'];
 $email = $_POST['email'];
+$assunto = $_POST['assunto'];
 $msg = $_POST['msg'];
 
-mail('robinhosl2008@gmail.com', 'oi', 'teste para saber se esta indo email.');
+mail($nome.' <contato@cadastroprodutos.esy.es>', $assunto, $msg);
