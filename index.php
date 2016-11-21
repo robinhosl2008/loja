@@ -9,21 +9,21 @@
 require_once("cabecalho.php");
 ?>
 
-<?php if(isset($_SESSION['login'])){ ?>
-    <p class="alert alert-success"><?php echo $_SESSION['login'] ?></p>
-<?php unset($_SESSION['login']); } ?>
+    <?php if(isset($_SESSION['acao']) && $_SESSION['acao'] == "Sucesso!") { ?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <strong><?php echo $_SESSION['acao']; ?></strong> <?php echo $_SESSION['resultado'] ?>.
+        </div>
+        <?php unset($_SESSION['acao'], $_SESSION['resultado']); } ?>
 
-<?php if(isset($_SESSION['logout'])){ ?>
-    <p class="alert alert-success"><?php echo $_SESSION['logout']; ?></p>
-<?php session_destroy(); } ?>
-
-<?php if(isset($_SESSION['usuario_nao_encontrado'])){ ?>
-    <p class="alert alert-warning">Usuário ou senha incorretos!</p>
-<?php } ?>
-
-<?php if(isset($_GET['321']) && $_GET['321'] == 159357){ ?>
-    <p class="alert alert-danger">Entre no sistema para ver esta página!</p>
-<?php } ?>
+    <?php if(isset($_SESSION['acao']) && $_SESSION['acao'] == "Atenção!") { ?>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <strong><?php echo $_SESSION['acao']; ?></strong> <?php echo $_SESSION['resultado'] ?>.
+        </div>
+    <?php unset($_SESSION['acao'], $_SESSION['resultado']); } ?>
 
     <h1>Bem vindo</h1>
 
