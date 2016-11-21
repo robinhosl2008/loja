@@ -6,8 +6,8 @@
  * Time: 11:14
  */
 
-include('logica-usuario.php');
-include('banco-produto.php');
+require_once('logica-usuario.php');
+require_once('banco-produto.php');
 
 verificaUsuario();
 
@@ -29,7 +29,7 @@ if($resultCadastro == true){
     $_SESSION['acao'] = "Sucesso!";
     $_SESSION['resultado'] = "O produto foi cadastrado.";
     header('location: produto-lista.php');
-}else{ $msg_error = mysqli_error($conexao);
+}else{
     $_SESSION['acao'] = "Atenção!";
     $_SESSION['resultado'] = "O produto não foi cadastrado.";
     header('location: produto-lista.php');

@@ -6,7 +6,7 @@
  * Time: 09:20
  */
 
-include('banco-usuario.php');
+require_once('banco-usuario.php');
 
 $email = $_POST['email'];
 $senha = $_POST['senha'];

@@ -10,7 +10,7 @@ if(!isset($_SESSION['usuario_logado'])){
     header('location: index.php');
 }
 
-include('banco-produto.php');
+require_once('banco-produto.php');
 //require_once('banco-produto.php');
 
 $id = $_POST['id'];

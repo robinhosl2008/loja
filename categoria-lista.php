@@ -6,7 +6,7 @@
  * Time: 21:30
  */
 
-include("banco-categoria.php");
+require_once("banco-categoria.php");
 
 function getCategorias(){
     $categorias = listaCategorias();

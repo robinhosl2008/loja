@@ -11,8 +11,8 @@ session_start();
 //}
 ?>
 
-<?php include('cabecalho.php'); ?>
+<?php require_once('cabecalho.php'); ?>
 
 <h1>Página onde é feita uma breve descrição do sistema.</h1>
 
-<?php include('rodape.php'); ?>
+<?php require_once('rodape.php'); ?>

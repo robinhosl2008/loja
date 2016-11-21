@@ -6,7 +6,7 @@
  * Time: 10:57
  */
 
-    include("cabecalho.php");
+require_once("cabecalho.php");
 ?>
 
 <?php if(isset($_SESSION['login'])){ ?>
@@ -48,8 +48,11 @@
             </form>
         </div>
     </div>
+    <div align="center">
+        Quero me <a href="#">cadastrar</a>!
+    </div>
 <?php } ?>
 
 
 <?php
-include("rodape.php"); ?>
+require_once("rodape.php"); ?>

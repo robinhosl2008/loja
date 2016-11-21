@@ -8,8 +8,8 @@
 ?>
 
 <?php
-    include("cabecalho.php");
-    include("categoria-lista.php");
+    require_once("cabecalho.php");
+    require_once("categoria-lista.php");
 ?>
 
 <?php if(!isset($_SESSION['usuario_logado'])){
@@ -95,4 +95,4 @@
         </tbody>
     </table>
 
-<?php include_once("rodape.php"); ?>
+<?php require_once("rodape.php"); ?>

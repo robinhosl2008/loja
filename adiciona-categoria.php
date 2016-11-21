@@ -6,8 +6,8 @@
  * Time: 11:14
  */
 
-include('logica-usuario.php');
-include('banco-categoria.php');
+require_once('logica-usuario.php');
+require_once('banco-categoria.php');
 
 verificaUsuario();
 

@@ -12,8 +12,8 @@ if(!isset($_SESSION['usuario_logado'])){
     header('location: index.php');
 }
 
-    include("cabecalho.php");
-    include("banco-produto.php");
+require_once("cabecalho.php");
+require_once("banco-produto.php");
 
 $id = $_POST['id'];
 $produto = buscaProduto($id);
@@ -53,7 +53,7 @@ $produto = buscaProduto($id);
                 />
         </div>
 
-        <?php include("banco-categoria.php"); ?>
+        <?php require_once("banco-categoria.php"); ?>
 
         <div class="form-group">
             <label for="categoria">Categoria</label>
@@ -76,4 +76,4 @@ $produto = buscaProduto($id);
     </form>
 </div>
 
-<?php include_once("rodape.php"); ?>
+<?php require_once("rodape.php"); ?>

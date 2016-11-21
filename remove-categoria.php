@@ -5,7 +5,7 @@
  * Date: 17/11/16
  * Time: 16:16
  */
-include('banco-categoria.php');
+require_once('banco-categoria.php');
 session_start();
 if(!isset($_SESSION['usuario_logado'])){
     header('location: index.php');

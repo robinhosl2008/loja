@@ -6,7 +6,7 @@
  * Time: 21:30
  */
 
-include('cabecalho.php');
+require_once('cabecalho.php');
 
 if(!isset($_SESSION['usuario_logado'])){
     header('location: index.php');
@@ -82,4 +82,4 @@ if(!isset($_SESSION['usuario_logado'])){
 
 
 
-<?php include('rodape.php'); ?>
+<?php require_once('rodape.php'); ?>

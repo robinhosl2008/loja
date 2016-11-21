@@ -1,6 +1,6 @@
 <?php
 
-include('logica-usuario.php');
+require_once('logica-usuario.php');
 logout();
 $_SESSION['logout'] = "O usuário saiu do sistema.";
 

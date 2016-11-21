@@ -6,7 +6,7 @@
  * Time: 15:43
  */
 
-include('banco-categoria.php');
+require_once('banco-categoria.php');
 
 function buscaCategoriaPorId($id){
 
