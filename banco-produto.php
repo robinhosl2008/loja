@@ -8,16 +8,16 @@
 
 require_once('conexao.php');
 
-function insereProduto($nome, $preco, $usado, $categoria, $descricao){
+function insereProduto(Produto $produto){
     // Pega a conexão.
     $conexao = getConnection();
 
     // Essa função é usada para evitar que caracteres especiais interfiram na execução da query.
-    $oNome = mysqli_real_escape_string($conexao, $nome);
-    $oDescricao = mysqli_real_escape_string($conexao, $descricao);
+    $oNome = mysqli_real_escape_string($conexao, $produto->no_produto);
+    $oDescricao = mysqli_real_escape_string($conexao, $produto->descricao);
 
     // Atribui a query SQL à variável.
-    $query = "insert into produto (no_produto, preco, usado, id_categoria, descricao) values ('{$oNome}',{$preco},{$usado},{$categoria},'{$oDescricao}')";
+    $query = "insert into produto (no_produto, preco, usado, id_categoria, descricao) values ('{$oNome}',{$produto->preco},{$produto->usado},{$produto->id_categoria},'{$oDescricao}')";
 
     // O resultado da busca é atribuido a uma variável.
     $result = mysqli_query($conexao, $query);
