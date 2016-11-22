@@ -7,6 +7,7 @@
  */
 
 require_once('conexao.php');
+//require_once('class/Produto.php');
 
 function insereProduto(Produto $produto){
     // Pega a conexão.
@@ -49,22 +50,22 @@ function listaProdutos(){
     return $produtos;
 }
 
-function alteraProduto($id, $nome, $preco, $usado, $descricao, $categoria){
+function alteraProduto(Produto $produto){
     // Pega a conexão.
     $conexao = getConnection();
 
     // Essa função é usada para evitar que caracteres especiais interfiram na execução da query.
-    $oNome = mysqli_real_escape_string($conexao, $nome);
-    $oDescricao = mysqli_real_escape_string($conexao, $descricao);
+    $oNome = mysqli_real_escape_string($conexao, $produto->no_produto);
+    $oDescricao = mysqli_real_escape_string($conexao, $produto->descricao);
 
     // Atribui a query SQL à variável.
     $query = "UPDATE produto
       SET no_produto = '{$oNome}',
-          preco = {$preco},
-          usado = {$usado},
-          id_categoria = {$categoria},
+          preco = {$produto->preco},
+          usado = {$produto->usado},
+          id_categoria = {$produto->id_categoria},
           descricao = '{$oDescricao}'
-      WHERE id = {$id}";
+      WHERE id = {$produto->id}";
 
     // Retorna o resultado da alteração.
     return mysqli_query($conexao, $query);

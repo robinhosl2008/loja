@@ -71,6 +71,7 @@ $produto = buscaProduto($id);
 
         <div class="form-group">
             <input class="btn btn-sm btn-primary" type="submit" value="Enviar"/>
+            <input class="btn btn-sm btn-default" type="button" value="Voltar" onclick="javascript:history.back()"/>
         </div>
 
     </form>

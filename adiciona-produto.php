@@ -14,6 +14,8 @@ verificaUsuario();
 
 $produto = new Produto();
 
+$produto->id_categoria = $_POST['categoria'];
+$produto->descricao = $_POST['descricao'];
 $produto->no_produto = $_POST['nome'];
 $produto->preco = $_POST['preco'];
 
@@ -23,8 +25,6 @@ else:
     $produto->usado = "false";
 endif;
 
-$produto->id_categoria = $_POST['categoria'];
-$produto->descricao = $_POST['descricao'];
 
 $resultCadastro = insereProduto($produto);
 
