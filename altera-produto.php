@@ -11,32 +11,35 @@ session_start();
 require_once("banco-produto.php");
 require_once('logica-usuario.php');
 require_once('class/Produto.php');
+require_once('class/Categoria.php');
 
 verificaUsuario();
 
-$produto = new Produto();
+$categoria = new Categoria();
+$categoria->setId($_POST['categoria']);
 
-$produto->id = $_POST['id'];
-$produto->no_produto = $_POST['nome'];
-$produto->preco = $_POST['preco'];
-$produto->descricao = $_POST['descricao'];
-$produto->id_categoria = $_POST['categoria'];
+$produto = new Produto();
+$produto->setId($_POST['id']);
+$produto->setNoProduto($_POST['nome']);
+$produto->setPreco($_POST['preco']);
+$produto->setDescricao($_POST['descricao']);
+$produto->setCategoria($categoria);
 
 if(array_key_exists('usado', $_POST)):
-    $produto->usado = "true";
+    $produto->setUsado("true");
 else:
-    $produto->usado = "false";
+    $produto->setUsado("false");
 endif;
 
 $result = alteraProduto($produto);
 
 if($result == true){
     $_SESSION['acao'] = "Sucesso!";
-    $_SESSION['resultado'] = "O produto $produto->no_produto foi alterado.";
+    $_SESSION['resultado'] = "O produto ".$produto->getNoProduto()." foi alterado.";
 
-}else{ $msg_error = mysqli_error($conexao);
+}else{
     $_SESSION['acao'] = "Atenção!";
-    $_SESSION['resultado'] = "O produto $produto->no_produto não foi alterado. Erro: ".$msg_error;
+    $_SESSION['resultado'] = "O produto ".$produto->getNoProduto()." não foi alterado.";
 }
 
 header('location: produto-lista.php');

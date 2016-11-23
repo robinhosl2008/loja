@@ -6,19 +6,24 @@
  * Time: 11:58
  */
 
+session_start();
+
 if(!isset($_SESSION['usuario_logado'])){
     header('location: index.php');
 }
 
 require_once('banco-produto.php');
-//require_once('banco-produto.php');
 
 $id = $_POST['id'];
 
 $result = removeProduto($id);
 
 if($result == true){
+    $_SESSION['acao'] = "Sucesso!";
+    $_SESSION['resultado'] = "O produto foi deletado.";
     header('location: produto-lista.php?acao=true');
-}else{ $msg_error = mysqli_error($conexao);
+}else{
+    $_SESSION['acao'] = "Atenção!";
+    $_SESSION['resultado'] = "O produto não foi deletado.";
     header('location: produto-lista.php?acao=false');
 }

@@ -8,6 +8,7 @@
 
 require_once('logica-usuario.php');
 require_once('banco-categoria.php');
+require_once('class/Categoria.php');
 
 verificaUsuario();
 
@@ -18,26 +19,32 @@ if(isset($_POST['nome']) && $_POST['nome'] == "") {
     die();
 }
 
+$categoria = new Categoria();
+
+$categoria->setNoCategoria($_POST['nome']);
+
 if(isset($_POST['id']) && $_POST['id'] != "") {
-    $result = editaCategoria($_POST['id'], $_POST['nome']);
+    $categoria->setId($_POST['id']);
+
+    $result = editaCategoria($categoria);
 }else{
-    $result = adicionaCategoria($_POST['nome']);
+    $result = adicionaCategoria($categoria);
 }
 
 if($result == true){
     $_SESSION['acao'] = "Sucesso!";
     if(isset($_POST['id']) && $_POST['id'] != ""){
-        $_SESSION['resultado'] = "A categoria foi alterada.";
+        $_SESSION['resultado'] = "A categoria ".$categoria->getNoCategoria()." foi alterada.";
     }else {
-        $_SESSION['resultado'] = "A categoria foi cadastrada.";
+        $_SESSION['resultado'] = "A categoria ".$categoria->getNoCategoria()." foi cadastrada.";
     }
     header('location: categoria-formulario.php');
-}else{ $msg_error = mysqli_error($conexao);
+}else{
     $_SESSION['acao'] = "Atenção!";
     if(isset($_POST['id']) && $_POST['id'] != ""){
-        $_SESSION['resultado'] = "A categoria nao foi alterada.";
+        $_SESSION['resultado'] = "A categoria ".$categoria->getNoCategoria()." nao foi alterada.";
     }else {
-        $_SESSION['resultado'] = "A categoria nao foi cadastrada.";
+        $_SESSION['resultado'] = "A categoria ".$categoria->getNoCategoria()." nao foi cadastrada.";
     }
     header('location: categoria-formulario.php');
 }

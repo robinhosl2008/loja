@@ -13,6 +13,7 @@ if(!isset($_SESSION['usuario_logado'])){
 }
 
 require_once("cabecalho.php");
+require_once("banco-categoria.php");
 require_once("banco-produto.php");
 
 $id = $_POST['id'];
@@ -27,33 +28,31 @@ $produto = buscaProduto($id);
 <div class="formulario">
     <form action="altera-produto.php" method="post">
 
-        <input type="hidden" name="id" id="id" value="<?php echo $produto['id']; ?>"/>
+        <input type="hidden" name="id" id="id" value="<?php echo $produto->getId(); ?>"/>
 
         <div class="form-group">
             <label for="nome">Produto</label>
-            <input class="form-control" type="text" name="nome" id="nome" value="<?php echo $produto['no_produto']; ?>"/>
+            <input class="form-control" type="text" name="nome" id="nome" value="<?php echo $produto->getNoProduto(); ?>"/>
         </div>
 
         <div class="form-group">
             <label for="preco">Preço</label>
-            <input class="form-control" type="text" name="preco" id="preco" value="<?php echo $produto['preco']; ?>"/>
+            <input class="form-control" type="text" name="preco" id="preco" value="<?php echo $produto->getPreco(); ?>"/>
         </div>
 
         <div class="form-group">
             <label for="descricao">Descrição</label>
-            <textarea class="form-control" name="descricao" id="descricao"> <?php echo $produto['descricao']; ?></textarea>
+            <textarea class="form-control" name="descricao" id="descricao"> <?php echo $produto->getDescricao(); ?></textarea>
         </div>
 
         <div class="form-group">
             <label for="usado">Usado:</label>
             <input type="checkbox" name="usado" id="usado" value="true"
-                <?php if($produto['usado'] == true): ?>
+                <?php if($produto->getUsado() == true): ?>
                     checked
                 <?php endif; ?>
                 />
         </div>
-
-        <?php require_once("banco-categoria.php"); ?>
 
         <div class="form-group">
             <label for="categoria">Categoria</label>
@@ -61,10 +60,10 @@ $produto = buscaProduto($id);
                 <option value="">Selecione...</option>
                 <?php $categorias = listaCategorias();
                 foreach ($categorias as $categoria) : ?>
-                    <option value="<?php echo $categoria['id']; ?>"
-                    <?php if($produto['id_categoria'] == $categoria['id']): ?>
+                    <option value="<?php echo $categoria->getId(); ?>"
+                    <?php if($produto->getCategoria()->getId() == $categoria->getId()): ?>
                         selected
-                    <?php endif;?>><?php echo $categoria['no_categoria']; ?></option>
+                    <?php endif ?>><?php echo $categoria->getNoCategoria(); ?></option>
                 <?php endforeach ?>
             </select>
         </div>

@@ -46,7 +46,7 @@ if(!isset($_SESSION['usuario_logado'])){
                 <option value="">Selecione...</option>
                 <?php $categorias = listaCategorias();
                     foreach ($categorias as $categoria) : ?>
-                    <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['no_categoria']; ?></option>
+                    <option value="<?php echo $categoria->getId(); ?>"><?php echo $categoria->getNoCategoria(); ?></option>
                 <?php endforeach ?>
             </select>
         </div>

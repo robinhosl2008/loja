@@ -7,6 +7,7 @@
  */
 
 require_once('conexao.php');
+require_once('class/Categoria.php');
 
 function listaCategorias(){
     // Pega a conexão.
@@ -23,7 +24,11 @@ function listaCategorias(){
 
     // É executada uma estrutura de repetição para pegar todas as categorias
     // e atribuir uma a uma ao array de categorias.
-    while ($categoria = mysqli_fetch_assoc($resultado)) {
+    while ($categoria_array = mysqli_fetch_assoc($resultado)) {
+        $categoria = new Categoria();
+        $categoria->setId($categoria_array['id']);
+        $categoria->setNoCategoria($categoria_array['no_categoria']);
+
         array_push($categorias, $categoria);
     }
 
@@ -31,15 +36,15 @@ function listaCategorias(){
     return $categorias;
 }
 
-function adicionaCategoria($no_categoria){
+function adicionaCategoria(Categoria $categoria){
     // Pega a conexão.
     $conexao = getConnection();
 
     // Essa função é usada para evitar que caracteres especiais interfiram na execução da query.
-    $oNoCategoria = mysqli_real_escape_string($conexao, $no_categoria);
+    $oNoCategoria = mysqli_real_escape_string($conexao, $categoria->getNoCategoria());
 
     // Atribui a query SQL à variável.
-    $query = "insert into categoria (no_categoria) values ('$oNoCategoria')";
+    $query = "insert into categoria (no_categoria) values ('".$oNoCategoria."')";
 
     // É executada uma estrutura de decisão para retornar true
     // se o produto foi registrado no banco ou não.
@@ -50,15 +55,15 @@ function adicionaCategoria($no_categoria){
     }
 }
 
-function editaCategoria($id, $no_categoria){
+function editaCategoria(Categoria $categoria){
     // Pega a conexão.
     $conexao = getConnection();
 
     // Essa função é usada para evitar que caracteres especiais interfiram na execução da query.
-    $oNoCategoria = mysqli_real_escape_string($conexao, $no_categoria);
+    $oNoCategoria = mysqli_real_escape_string($conexao, $categoria->getNoCategoria());
 
     // Atribui a query SQL à variável.
-    $query = "update categoria set no_categoria='$oNoCategoria' where id = $id";
+    $query = "update categoria set no_categoria = '".$oNoCategoria."' where id = ".$categoria->getId();
 
     // É executada uma estrutura de decisão para retornar true
     // se o produto foi alterado no banco ou não.
@@ -80,7 +85,11 @@ function buscaCategoria($id){
     $result = mysqli_query($conexao, $query);
 
     // É atribuida a variável a primera linha do resultado.
-    $categoria = mysqli_fetch_assoc($result);
+    if($categoria_array = mysqli_fetch_assoc($result)) {
+        $categoria = new Categoria();
+        $categoria->setId($categoria_array['id']);
+        $categoria->setNoCategoria($categoria_array['no_categoria']);
+    }
 
     // Retorna o resultado em forma de array.
     return $categoria;

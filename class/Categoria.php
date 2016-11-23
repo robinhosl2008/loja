@@ -8,7 +8,34 @@
 
 class Categoria {
 
-    public $id;
-    public $no_categoria;
+    private $id;
+    private $no_categoria;
 
+    /**
+     * @param $id
+     */
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @param $noCategoria
+     */
+    public function setNoCategoria($noCategoria) {
+        $this->no_categoria = $noCategoria;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNoCategoria() {
+        return $this->no_categoria;
+    }
 }

@@ -9,32 +9,34 @@
 require_once('logica-usuario.php');
 require_once('banco-produto.php');
 require_once('class/Produto.php');
+require_once('class/Categoria.php');
 
 verificaUsuario();
 
-$produto = new Produto();
+$categoria = new Categoria();
+$categoria->setId($_POST['categoria']);
 
-$produto->id_categoria = $_POST['categoria'];
-$produto->descricao = $_POST['descricao'];
-$produto->no_produto = $_POST['nome'];
-$produto->preco = $_POST['preco'];
+$produto = new Produto();
+$produto->setNoProduto($_POST['nome']);
+$produto->setPreco($_POST['preco']);
+$produto->setDescricao($_POST['descricao']);
+$produto->setCategoria($categoria);
 
 if(array_key_exists('usado',$_POST)):
-    $produto->usado = "true";
+    $produto->setUsado("true");
 else:
-    $produto->usado = "false";
+    $produto->setUsado("false");
 endif;
-
 
 $resultCadastro = insereProduto($produto);
 
 if($resultCadastro == true){
     $_SESSION['acao'] = "Sucesso!";
-    $_SESSION['resultado'] = "O produto $produto->no_produto foi cadastrado.";
+    $_SESSION['resultado'] = "O produto ".$produto->getNoProduto()." foi cadastrado.";
     header('location: produto-lista.php');
 }else{
     $_SESSION['acao'] = "Atenção!";
-    $_SESSION['resultado'] = "O produto não foi cadastrado.";
+    $_SESSION['resultado'] = "O produto ".$produto->getNoProduto()." não foi cadastrado.";
     header('location: produto-lista.php');
 }
 

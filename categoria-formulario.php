@@ -9,7 +9,7 @@
 
 <?php
     require_once("cabecalho.php");
-    require_once("categoria-lista.php");
+    require_once("banco-categoria.php");
 ?>
 
 <?php if(!isset($_SESSION['usuario_logado'])){
@@ -29,9 +29,9 @@
         <div class="form-group">
             <label for="nome">Categoria</label>
             <input class="form-control" type="text" name="nome" id="nome" value="<?php
-                    if(isset($_POST['id'])){
-                        $cat = getCategoria($_POST['id']);
-                        echo $cat['no_categoria'];
+                if(isset($_POST['id'])){
+                        $cat = buscaCategoria($_POST['id']);
+                        echo $cat->getNoCategoria();
                     }
                 ?>" />
         </div>
@@ -72,20 +72,20 @@
         </thead>
         <tbody>
         <?php
-        $categorias = getCategorias();
+        $categorias = listaCategorias();
         foreach($categorias as $categoria) : ?>
             <tr>
-                <td align="left"><?php echo $categoria['no_categoria']; ?></td>
+                <td align="left"><?php echo $categoria->getNoCategoria(); ?></td>
                 <td>
                     <div style="position: relative; float: left">
                         <form method="post" action="categoria-formulario.php">
-                            <input type="hidden" id="id" name="id" value="<?php echo $categoria['id']; ?>">
+                            <input type="hidden" id="id" name="id" value="<?php echo $categoria->getId(); ?>">
                             <button class="text-primary"><span class="glyphicon glyphicon-pencil"></span></button>
                         </form>
                     </div>
                     <div style="position: relative; float: right">
                         <form method="post" action="remove-categoria.php">
-                            <input type="hidden" id="id" name="id" value="<?php echo $categoria['id']; ?>">
+                            <input type="hidden" id="id" name="id" value="<?php echo $categoria->getId(); ?>">
                             <button class="text-danger"><span class="glyphicon glyphicon-remove"></span></button>
                         </form>
                     </div>

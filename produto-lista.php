@@ -37,6 +37,7 @@ if(!isset($_SESSION['usuario_logado'])){
             <tr>
                 <td><label>NOME</label></td>
                 <td><label>PREÇO</label></td>
+                <td><label>-10%</label></td>
                 <td><label>ESTADO</label></td>
                 <td><label>CATEGORIA</label></td>
                 <td><label>DESCRIÇÃO</label></td>
@@ -48,29 +49,30 @@ if(!isset($_SESSION['usuario_logado'])){
         $produtos = listaProdutos();
         foreach($produtos as $produto) : ?>
             <tr>
-                <td><?php echo $produto['no_produto']; ?></td>
-                <td>R$<?php echo $produto['preco']; ?></td>
+                <td><?php echo $produto->getNoProduto(); ?></td>
+                <td>R$<?php echo $produto->getPreco(); ?></td>
+                <td>R$<?php echo $produto->precoComDesconto(); ?></td>
                 <td>
                     <?php
-                        if($produto['usado'] == true):
+                        if($produto->getUsado() == true):
                             echo "Usado";
                         else:
                             echo "Novo";
                         endif;
                     ?>
                 </td>
-                <td><?php echo $produto['no_categoria']; ?></td>
-                <td><?php echo substr($produto['descricao'], 0, 30); ?></td>
+                <td><?php echo $produto->getCategoria()->getNoCategoria(); ?></td>
+                <td><?php echo substr($produto->getDescricao(), 0, 30); ?></td>
                 <td>
                     <div style="position: relative; float: left">
                         <form method="post" action="produto-altera-formulario.php">
-                            <input type="hidden" id="id" name="id" value="<?php echo $produto['id']; ?>">
+                            <input type="hidden" id="id" name="id" value="<?php echo $produto->getId(); ?>">
                             <button class="text-primary"><span class="glyphicon glyphicon-pencil"></span></button>
                         </form>
                     </div>
                     <div style="position: relative; float: right">
                         <form method="post" action="remove-produto.php">
-                            <input type="hidden" id="id" name="id" value="<?php echo $produto['id']; ?>">
+                            <input type="hidden" id="id" name="id" value="<?php echo $produto->getId(); ?>">
                             <button class="text-danger"><span class="glyphicon glyphicon-remove"></span></button>
                         </form>
                     </div>
