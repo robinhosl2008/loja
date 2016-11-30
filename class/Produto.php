@@ -15,15 +15,24 @@ class Produto {
     private $categoria;
     private $descricao;
 
-    /**
-     * @param float $valor
-     * @return mixed
-     */
-    public function precoComDesconto($valor = 0.1) {
-        if($valor > 0 && $valor <= 0.5) {
-            return $this->preco - $this->preco * $valor;
-        }
+    // Função que inicia a classe ao ser instanciada.
+    function __construct($no_produto, $preco, $usado, Categoria $categoria, $descricao) {
+        $this->no_produto = $no_produto;
+        $this->preco      = $preco;
+        $this->usado      = $usado;
+        $this->categoria  = $categoria;
+        $this->descricao  = $descricao;
     }
+
+    // Após utilizar o objeto ele é retirado da memória.
+    //function __destruct() {
+
+    //}
+
+    // Função caso quisermos imprimir o objeto como uma string.
+    //function __toString() {
+        //return $this->no_produto.": R$".$this->preco;
+    //}
 
     /**
      * @param $id
@@ -57,7 +66,9 @@ class Produto {
      * @param $preco
      */
     public function setPreco($preco) {
-        $this->preco = $preco;
+        if($preco > 0) {
+            $this->preco = $preco;
+        }
     }
 
     /**
@@ -107,6 +118,16 @@ class Produto {
      */
     public function getDescricao() {
         return $this->descricao;
+    }
+
+    /**
+     * @param float $valor
+     * @return mixed
+     */
+    public function precoComDesconto($valor = 0.1) {
+        if($valor > 0 && $valor <= 0.5) {
+            return $this->preco - $this->preco * $valor;
+        }
     }
 }
 

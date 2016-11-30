@@ -25,9 +25,9 @@ function listaCategorias(){
     // É executada uma estrutura de repetição para pegar todas as categorias
     // e atribuir uma a uma ao array de categorias.
     while ($categoria_array = mysqli_fetch_assoc($resultado)) {
-        $categoria = new Categoria();
+        $no_categoria = $categoria_array['no_categoria'];
+        $categoria = new Categoria($no_categoria);
         $categoria->setId($categoria_array['id']);
-        $categoria->setNoCategoria($categoria_array['no_categoria']);
 
         array_push($categorias, $categoria);
     }

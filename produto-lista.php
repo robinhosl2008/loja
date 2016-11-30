@@ -46,7 +46,8 @@ if(!isset($_SESSION['usuario_logado'])){
         </thead>
         <tbody>
         <?php
-        $produtos = listaProdutos();
+        $produtoDAO = new ProdutoDAO(getConnection());
+        $produtos = $produtoDAO->listaProdutos();
         foreach($produtos as $produto) : ?>
             <tr>
                 <td><?php echo $produto->getNoProduto(); ?></td>

@@ -7,8 +7,6 @@
  */
 
 require_once('conexao.php');
-require_once('class/Produto.php');
-require_once('class/Categoria.php');
 
 function insereProduto(Produto $produto){
     // Pega a conexão.
@@ -24,6 +22,9 @@ function insereProduto(Produto $produto){
 
     // O resultado da busca é atribuido a uma variável.
     $result = mysqli_query($conexao, $query);
+
+    // Fecha a conexão com o banco de dados.
+    mysqli_close($conexao);
 
     // Retorna o resultado em forma de array.
     return $result;
@@ -46,19 +47,19 @@ function listaProdutos(){
     // e atribuir uma a uma ao array de categorias.
     while($produto_array = mysqli_fetch_assoc($resultado1)){
 
-        // Instancia os objetos e seta seus atributos.
-        $produto = new Produto();
-        $produto->setId($produto_array['id']);
-        $produto->setNoProduto($produto_array['no_produto']);
-        $produto->setPreco($produto_array['preco']);
-        $produto->setDescricao($produto_array['descricao']);
-        $produto->setUsado($produto_array['usado']);
+        $id = $produto_array['id'];
+        $no_produto = $produto_array['no_produto'];
+        $preco = $produto_array['preco'];
+        $descricao = $produto_array['descricao'];
+        $usado = $produto_array['usado'];
 
         $categoria = new Categoria();
         $categoria->setId($produto_array['id']);
         $categoria->setNoCategoria($produto_array['no_categoria']);
 
-        $produto->setCategoria($categoria);
+        // Instancia os objetos e seta seus atributos.
+        $produto = new Produto($no_produto, $preco, $usado, $categoria, $descricao);
+        $produto->setId($id);
 
         array_push($produtos, $produto);
     }
@@ -112,17 +113,16 @@ function buscaProduto($id){
     // É atribuida a variável a primera linha do resultado.
     $produto_array = mysqli_fetch_assoc($result);
 
-    $produto = new Produto();
-    $produto->setId($produto_array['id']);
-    $produto->setNoProduto($produto_array['no_produto']);
-    $produto->setPreco($produto_array['preco']);
-    $produto->setDescricao($produto_array['descricao']);
-    $produto->setUsado($produto_array['usado']);
+    $no_produto = $produto_array['no_produto'];
+    $preco = $produto_array['preco'];
+    $descricao = $produto_array['descricao'];
+    $usado = $produto_array['usado'];
 
     $categoria = new Categoria();
     $categoria->setId($produto_array['id_categoria']);
 
-    $produto->setCategoria($categoria);
+    $produto = new Produto($no_produto, $preco, $usado, $categoria, $descricao);
+    $produto->setId($produto_array['id']);
 
     // Retorna o produto buscado.
     return $produto;

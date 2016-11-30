@@ -13,13 +13,10 @@ if(!isset($_SESSION['usuario_logado'])){
 }
 
 require_once("cabecalho.php");
-require_once("banco-categoria.php");
-require_once("banco-produto.php");
 
 $id = $_POST['id'];
-$produto = buscaProduto($id);
-
-
+$produtoDAO = new ProdutoDAO(getConnection());
+$produto = $produtoDAO->buscaProduto($id);
 ?>
 
 

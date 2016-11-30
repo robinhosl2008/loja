@@ -8,30 +8,29 @@
 
 session_start();
 
-require_once("banco-produto.php");
+require_once("cabecalho.php");
 require_once('logica-usuario.php');
-require_once('class/Produto.php');
-require_once('class/Categoria.php');
 
 verificaUsuario();
 
 $categoria = new Categoria();
 $categoria->setId($_POST['categoria']);
 
-$produto = new Produto();
-$produto->setId($_POST['id']);
-$produto->setNoProduto($_POST['nome']);
-$produto->setPreco($_POST['preco']);
-$produto->setDescricao($_POST['descricao']);
-$produto->setCategoria($categoria);
+$no_produto = $_POST['nome'];
+$preco = $_POST['preco'];
+$descricao = $_POST['descricao'];
 
 if(array_key_exists('usado', $_POST)):
-    $produto->setUsado("true");
+    $usado = 1;
 else:
-    $produto->setUsado("false");
+    $usado = 0;
 endif;
 
-$result = alteraProduto($produto);
+$produto = new Produto($no_produto, $preco, $usado, $categoria, $descricao);
+$produto->setId($_POST['id']);
+
+$produtoDAO = new ProdutoDAO(getConnection());
+$result = $produtoDAO->alteraProduto($produto);
 
 if($result == true){
     $_SESSION['acao'] = "Sucesso!";

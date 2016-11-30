@@ -5,6 +5,23 @@
  * Date: 24/10/2016
  * Time: 11:37
  */
+
+/*
+// função autoload que carrega as classes.
+function carregaClasse($nomeDaClasse) {
+    require_once("class/".$nomeDaClasse.".php");
+}
+
+// registro da função de autoload.
+spl_autoload_register("carregaClasse");
+*/
+
+spl_autoload_register(function($class) {
+    require_once "class/".$class.".php";
+    require_once "conexao.php";
+});
+
+error_reporting(E_ALL ^ E_NOTICE)
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +61,12 @@
                             <ul class="dropdown-menu">
                                 <li><a href="produto-formulario.php">Produtos</a></li>
                                 <li><a href="categoria-formulario.php">Categorias</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relatórios <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="relatorio-hd.php">Uso do Disco Rígido</a></li>
                             </ul>
                         </li>
                     <?php endif; ?>
