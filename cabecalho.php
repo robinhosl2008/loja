@@ -6,6 +6,13 @@
  * Time: 11:37
  */
 
+require_once("class/Categoria.php");
+require_once("class/Produto.php");
+require_once("class/ProdutoDAO.php");
+require_once("conexao.php");
+
+verificaUsuario();
+
 /*
 // função autoload que carrega as classes.
 function carregaClasse($nomeDaClasse) {
@@ -16,10 +23,10 @@ function carregaClasse($nomeDaClasse) {
 spl_autoload_register("carregaClasse");
 */
 
-spl_autoload_register(function($class) {
-    require_once "class/".$class.".php";
-    require_once "conexao.php";
-});
+//spl_autoload_register(function($class) {
+  //  require_once "class/".$class.".php";
+    //require_once "conexao.php";
+//});
 
 error_reporting(E_ALL ^ E_NOTICE)
 ?>
