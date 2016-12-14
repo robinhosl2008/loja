@@ -11,8 +11,6 @@ require_once("class/Produto.php");
 require_once("class/ProdutoDAO.php");
 require_once("conexao.php");
 
-verificaUsuario();
-
 /*
 // função autoload que carrega as classes.
 function carregaClasse($nomeDaClasse) {

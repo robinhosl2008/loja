@@ -25,31 +25,32 @@ require_once("cabecalho.php");
         </div>
     <?php unset($_SESSION['acao'], $_SESSION['resultado']); } ?>
 
-    <h1>Bem vindo</h1>
-
 <?php if(isset($_SESSION['usuario_logado'])){ ?>
     <p class="alert">Usuário <?php echo $_SESSION['usuario_logado']; ?> logado</p>
 <?php }else{?>
-    <div align="center">
-        <h2>Login</h2>
-        <div style="width: 200px">
-            <form method="post" action="login.php">
-                <div class="form-group">
-                    <label for="email">E-mail:</label>
-                    <input class="form-control" type="email" name="email" id="email" />
+    <div align="center" class="panel panel-default">
+        <div class="panel-body">
+            <h2>Login</h2>
+            <div style="width: 200px">
+                <form method="post" action="login.php">
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input class="form-control" type="email" name="email" id="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha:</label>
+                        <input class="form-control" type="password" name="senha" id="senha" />
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary btn-sm" type="submit" value="Entrar" />
+                    </div>
+                </form>
+
+                <div align="center">
+                    Quero me <a href="#">cadastrar</a>!
                 </div>
-                <div class="form-group">
-                    <label for="senha">Senha:</label>
-                    <input class="form-control" type="password" name="senha" id="senha" />
-                </div>
-                <div class="form-group">
-                    <input class="btn btn-primary btn-sm" type="submit" value="Entrar" />
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-    <div align="center">
-        Quero me <a href="#">cadastrar</a>!
     </div>
 <?php } ?>
 
