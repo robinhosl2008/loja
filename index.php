@@ -47,7 +47,45 @@ require_once("cabecalho.php");
                 </form>
 
                 <div align="center">
-                    Quero me <a href="#">cadastrar</a>!
+                    Quero me <a href="#" style="text-decoration: none" data-toggle="modal" data-target="#myModal">cadastrar</a>!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Formulário de Cadastro</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-12">
+                            <form id="formCadUsuario" method="post" action="" class="form-inline form-group">
+                                <div class="col-sm-12 col-lg-12" style="text-align: left; padding-top: 15px">
+                                    <div class="col-sm-2 col-lg-2"></div>
+                                    <label class="col-sm-4 col-lg-4" for="login">E-mail: </label>
+                                    <input class="form-control col-sm-6 col-lg-6" type="email" name="login" id="login" />
+                                </div>
+                                <div class="col-sm-12 col-lg-12" style="text-align: left; padding-top: 15px">
+                                    <div class="col-sm-2 col-lg-2"></div>
+                                    <label class="col-sm-4 col-lg-4" for="senha">Senha: </label>
+                                    <input class="form-control col-sm-6 col-lg-6" type="password" name="senha" id="senha" />
+                                </div>
+                                <div class="col-sm-12 col-lg-12" style="text-align: left; padding-top: 15px">
+                                    <div class="col-sm-2 col-lg-2"></div>
+                                    <label class="col-sm-4 col-lg-4" for="confSenha">Confirmar Senha: </label>
+                                    <input class="form-control col-sm-6 col-lg-6" type="password" name="confSenha" id="confSenha" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCadastrar" onclick="cadastrarUsuario()" class="btn btn-primary">Cadastrar</button>
+                    <button type="button" id="btnCancelar" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>

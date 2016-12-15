@@ -15,7 +15,7 @@ class UsuarioDAO {
     }
 
     public function cadastraUsuario(){
-        
+
     }
 
 }
